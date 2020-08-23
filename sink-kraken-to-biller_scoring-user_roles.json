@@ -1,0 +1,18 @@
+{
+    "name": "sink-kraken-to-biller_scoring-user_roles",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "connection.url": "jdbc:mysql://localhost:3306/biller_scoring?",
+        "connection.user": "root",
+        "connection.password": "agh765@V",
+        "topics": "REKEY_USER_ROLES",
+        "tasks.max": "1",
+        "table.name.format": "kraken-to-biller_scoring-user_roles",
+        "insert.mode": "upsert",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "value.converter": "io.confluent.connect.avro.AvroConverter",
+        "value.converter.schema.registry.url": "http://localhost:8081",
+        "pk.mode": "record_value",
+        "pk.fields": "ID"
+    }
+}

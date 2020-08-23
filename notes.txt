@@ -1,0 +1,25 @@
+//stream k_users
+create stream k_users (id integer, username string, role_id integer, is_active integer, updated_at bigint) with (kafka_topic='k-users', value_format='AVRO');
+create stream k_users_rekey as select * from k_users partition by role_id;
+
+// table k_roles
+create stream k_roles (id integer, name string, is_admin integer) with (kafka_topic='k-roles', value_format='AVRO');
+create stream k_roles_rekey as select * from k_roles partition by id;
+create table table_k_roles (id integer, name string, is_admin integer) with (kafka_topic='K_ROLES_REKEY', value_format='AVRO', key='ID');
+
+//join roles and user as stream stream_users_roles
+create stream k_users_roles as select user.id as id, 
+user.username as username, 
+user.role_id as role_id, 
+role.name as rolename,
+user.is_active as is_active, 
+role.is_admin as is_admin,
+timestamptostring(user.updated_at, 'yyyy-MM-dd HH:mm:ss') as updated_at 
+from k_users_rekey user
+left join table_k_roles role on user.role_id=role.id;
+
+//rekey users_roles by user_id
+create stream k_users_roles_rekey as select * from k_users_roles partition by id;
+
+//create table users_roles
+create table table_users_roles (id integer, username string, role_id integer, rolename string, is_active integer, is_admin integer, updated_at string) with (kafka_topic='K_USERS_ROLES_REKEY', value_format='AVRO', key='ID');

@@ -1,0 +1,19 @@
+{
+    "name": "sink_students_result",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "table.name.format": "students_result",
+        "connection.password": "agh765@V",
+        "topics": "STUDENTS_RESULT_REKEY",
+        "tasks.max": "1",
+        "auto.evolve": "true",
+        "connection.user": "root",
+        "name": "sink_students_result",
+        "auto.create": "true",
+        "connection.url": "jdbc:mysql://localhost:3306/student_score?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+        "insert.mode": "upsert",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+        "pk.mode": "record_value",
+        "pk.fields": "ID"
+    }
+}

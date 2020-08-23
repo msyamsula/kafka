@@ -1,0 +1,19 @@
+{
+    "name": "k-users-1",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+        "connection.url": "jdbc:mariadb://kraken2slave2.cn26rqn0gh39.ap-southeast-1.rds.amazonaws.com:3306/kraken?",
+        "connection.user": "smartbiller_kraken",
+        "connection.password": "jJsr?kKrErqc!Y32",
+        "query": "SELECT id, username, role_id, is_active, updated_at FROM kraken.users",
+        "mode": "timestamp+incrementing",
+        "incrementing.column.name": "id",
+        "timestamp.column.name": "updated_at",
+        "tasks.max": "1",
+        "topic.prefix": "k-users",
+        "value.converter": "io.confluent.connect.avro.AvroConverter",
+        "value.converter.schema.registry.url": "http://localhost:8081",
+        "key.converter": "io.confluent.connect.avro.AvroConverter",
+        "key.converter.schema.registry.url": "http://localhost:8081"
+    }
+}

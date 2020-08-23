@@ -1,0 +1,22 @@
+{
+    "name": "students_source9",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+        "timestamp.column.name": "timestamp",
+        "incrementing.column.name": "id",
+        "transforms.createKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+        "connection.password": "agh765@V",
+        "tasks.max": "1",
+        "query": "SELECT * FROM student_score.students",
+        "transforms": "createKey,extractInt",
+        "transforms.extractInt.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+        "mode": "timestamp+incrementing",
+        "topic.prefix": "students_source9",
+        "transforms.extractInt.field": "id",
+        "connection.user": "root",
+        "transforms.createKey.fields": "id",
+        "name": "students_source9",
+        "connection.url": "jdbc:mysql://localhost:3306/student_score?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+        "key.converter": "org.apache.kafka.connect.storage.StringConverter"
+    }
+}

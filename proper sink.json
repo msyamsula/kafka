@@ -1,0 +1,19 @@
+{
+  "name": "trx_biller_sink",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:mysql://localhost:3306/anomaly?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+    "connection.user": "root",
+    "connection.password": "agh765@V",
+    "tasks.max": "1",
+    "table.name.format": "live_db",
+    "topics": "TRX_BILLER_TABLE_TOPIC",
+    "insert.mode": "upsert",
+    "pk.mode": "record_value",
+    "pk.fields": "ID",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter.schema.registry.url": "http://localhost:8081",
+    "key.converter.schema.registry.url": "http://localhost:8081"
+  }
+}

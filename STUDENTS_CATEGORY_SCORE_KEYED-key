@@ -1,0 +1,6 @@
+{
+    "schema":"{
+        \"name\": \"STUDENTS_CATEGORY_SCORE_KEYED-key\",
+        \"type\": \"string\"
+    }"
+}
